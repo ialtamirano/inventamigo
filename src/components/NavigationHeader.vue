@@ -1,21 +1,14 @@
 <template>
         <nav class="navbar is-white ">
  <div class="container">
-        <div class="navbar-item">
-                <div class="control  has-icons-left ">
-                    <input class="input " type="text" placeholder="Buscar...">
-                    <span class="icon  is-left">
-                    <i class="fa fa-search"></i>
-                    </span>                 
-                </div>
-        </div>  
+
         <div class="navbar-item bd-navbar-item bd-navbar-item-base has-dropdown is-hoverable navbar-start--centered">
-                    <a class="navbar-item" href="/">
+                    <router-link class="navbar-item" :to="'/'">
                         <img src="../assets/img/inventamigo_logo_snake.png" >
                         <span class="icon has-text-sponsor">
                         <i class="fas fa-caret-down"></i>
                         </span>
-                    </a>        
+                    </router-link>        
                     <div class="navbar-dropdown bd-navbar-dropdown is-boxed">
                         <a class="navbar-item" data-route="" href="/">
                             <div>
@@ -108,7 +101,7 @@
                         </a>
                         
                             <hr class="navbar-divider ">
-                        <a class="navbar-item" data-route="" href="/locaciones">
+                        <router-link class="navbar-item"  :to="{ name: 'locations-list'}" >
                             <div>
                                 <div class="icon-text">
                                 <span class="icon has-text-bootstrap">
@@ -120,11 +113,12 @@
                                 </div>
                                 See how Bulma is an alternative to Bootstrap
                             </div>
-                        </a>
+                        </router-link>
                         
                         
                     </div>
-        </div> 
+        </div>
+        
         <div class="navbar-item navbar-end" id="navMenu">
                     <div class="navbar-end">
                         <div class="navbar-item has-dropdown is-hoverable"><a class="navbar-link">Ivan</a>
@@ -135,6 +129,7 @@
                 </div>
             </div>
         </div>
+        
       </div>
         </nav>
   
