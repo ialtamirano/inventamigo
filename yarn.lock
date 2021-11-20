@@ -2328,6 +2328,11 @@ builtin-status-codes@^3.0.0:
   resolved "https://registry.npmjs.org/builtin-status-codes/-/builtin-status-codes-3.0.0.tgz"
   integrity sha1-hZgoeOIbmOHGZCXgPQF0eI9Wnug=
 
+bulma-floating-button@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/bulma-floating-button/-/bulma-floating-button-1.0.3.tgz#4187f0efbcc7b5ea33804bf2e9f37ad1a695c6c2"
+  integrity sha512-sZWyZhXCkscykLMxlaQ8azFdqMb/ONOUMYZFplkzKSGhzmoaDLfJOZ59XMEpnG+KZ8f8dMZqUybRInGMeF2P/A==
+
 bulma-list@^1.1.4:
   version "1.1.4"
   resolved "https://registry.npmjs.org/bulma-list/-/bulma-list-1.1.4.tgz"

@@ -3,6 +3,7 @@ import { createApp } from 'vue/dist/vue.esm-bundler';
 import App from './App.vue'
 import locationRoutes from './router/location-router'
 import inboxRoutes from './router/inbox-router'
+import partRoutes from './router/part-router'
 import {createRouter, createWebHistory} from 'vue-router'  
 //import VueMoment from 'vue-moment'
 //import moment from 'moment-timezone'
@@ -30,7 +31,7 @@ const baseRoutes = [
   
 ]
 
-const routes = baseRoutes.concat(locationRoutes).concat(inboxRoutes);
+const routes = baseRoutes.concat(locationRoutes).concat(inboxRoutes).concat(partRoutes);
 
 
 const router = createRouter({

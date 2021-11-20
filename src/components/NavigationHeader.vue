@@ -1,5 +1,5 @@
 <template>
-        <nav class="navbar is-white ">
+        <nav class="navbar is-whiteS ">
  <div class="container">
 
         <div class="navbar-item bd-navbar-item bd-navbar-item-base has-dropdown is-hoverable navbar-start--centered">
@@ -10,38 +10,38 @@
                         </span>
                     </router-link>        
                     <div class="navbar-dropdown bd-navbar-dropdown is-boxed">
-                        <a class="navbar-item" data-route="" href="/">
+                        <router-link class="navbar-item" data-route="" :to="'/parts'">
                             <div>
                                 <div class="icon-text">
                                 <span class="icon has-text-extensions">
-                                    <i class="fas fa-plug"></i>
+                                    <i class="fas fa-tags"></i>
                                 </span>
                                 <span>
-                                    <strong>Bulma extensions.</strong>
+                                    <strong>Mi Catalogo</strong>
                                 </span>
                                 </div>
-                                Side projects to enhance Bulma
+                                Busqueda de articulos, catalogo, inventario
                             </div>
-                        </a>
+                        </router-link>
                         
                         <hr class="navbar-divider ">
                         
                         
                         
                         
-                        <a class="navbar-item" data-route="" href="/">
+                        <router-link class="navbar-item" data-route="" :to="'/customers'">
                             <div>
                                 <div class="icon-text">
                                 <span class="icon has-text-bleeding">
                                     <i class="fas fa-bookmark"></i>
                                 </span>
                                 <span>
-                                    <strong>The official Bulma book</strong>
+                                    <strong>Clientes</strong>
                                 </span>
                                 </div>
-                                A step-by-step guide that teaches you how to build a web interface from scratch using Bulma
+                                Agrega nuevos clientes, direccione, informacion de contacto...
                             </div>
-                        </a>
+                        </router-link>
                         
                             <hr class="navbar-divider ">
                         

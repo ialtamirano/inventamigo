@@ -1,0 +1,84 @@
+<template>
+    <div class="level ">
+        <div class="level-left ">
+        <h1 class="title is-4 mb-2">Numeros de parte</h1> 
+        </div>
+        <div class="level-right">
+            <router-link :to="{ name: 'parts-create'}"  class="button is-link is-rounded is-outlined">
+                <span class="icon">
+                    <i class="fas fa-plus"></i>
+                </span> 
+            <span>Agregar </span></router-link>
+            
+        </div>
+    </div>
+    
+    <div class="">
+        <table class="table is-hoverable is-fullwidth ">
+            <tbody>
+                <tr v-for="part in parts" :key="part.id">
+                        <td width="5%">
+                            <figure class="image is-64x64">
+                       <img src="https://bulma.io/images/placeholders/64x64.png">
+                        </figure>
+                        </td>
+                        <td><span class="is-size-5"> <router-link :to="'/partes/'+part.id">  {{part.name}}</router-link></span>  </td>
+                        
+                        <td>
+                            <router-link :to="{ name: 'parts-edit', params: { id: part.id }}"   class="badge badge-warning"><span class="icon is-edit"><i class="fas fa-edit"></i></span>Edit</router-link>
+                        </td>
+                </tr>
+            </tbody>
+        </table>
+                        
+    </div>
+   
+</template>
+<script>
+
+import PartDataService from "../../services/PartDataService"
+
+
+export default {
+  name:"parts-list",
+  data: () =>({
+      parts : [],
+      currentPart:{},
+      currentIndex: -1,
+      name : ""
+
+  }),
+  mounted() {
+      
+       this.retrieveParts();
+    
+  },
+  methods: {
+      retrieveParts(){
+        PartDataService.getAll()
+        .then( response => {
+            this.parts = response.data.data;
+        })
+        .catch(e => {
+            console.log(e.response);
+            alert(e.response.data.error.description);
+        })
+      },
+      refreshList(){
+          this.retrieveParts();
+          this.currentPart = null;
+          this.currentIndex = -1;
+      },
+      setActivePart(part, index){
+          this.currentPart = part;
+          this.currentIndex = part? index : -1;
+      },
+
+      create : function(){},
+      delete : function()
+      {
+          
+      }
+  }
+}
+</script>
