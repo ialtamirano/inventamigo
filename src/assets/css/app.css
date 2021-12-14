@@ -62,7 +62,7 @@ html,body {
     color: #485fc7!important
   }
 
-  .navbar-start--centered {
+.navbar-start--centered {
     flex-grow: 1;
     justify-content: center;
 }
@@ -71,3 +71,6 @@ html,body {
   margin-left: 0.5em;
   margin-right: 0.5em;
 }
+
+
+

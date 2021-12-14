@@ -5,7 +5,7 @@
     <h1 class="title is-4 mb-2">Inbox</h1>
     
     <div class="list has-hoverable-list-items has-overflow-ellipsis">
-      <div class="list-item"  v-for="inboxItem in inbox" :key="inboxItem.id" @click="goToInboxItem(inboxItem)" >
+      <div class="list-item is-clickable"  v-for="inboxItem in inbox" :key="inboxItem.id" @click="goToInboxItem(inboxItem)" >
         
         <div class="list-item-image">
           <figure class="image inbox-image is-48x48">

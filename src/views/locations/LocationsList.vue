@@ -20,9 +20,7 @@
                         <td width="5%"></td>
                         <td><span class="is-size-5"> <router-link :to="'/locaciones/'+location.id">  {{location.name}}</router-link></span>  </td>
                         
-                        <td >
-                            <router-link :to="{ name: 'locations-edit', params: { id: location.id }}"   class="badge badge-warning"><span class="icon is-edit"><i class="fas fa-edit"></i></span>Edit</router-link>
-                            </td>
+                        
                 </tr>
             </tbody>
         </table>

@@ -7,12 +7,15 @@
 import MainLayout from './layouts/Main.vue'
 
 
+
 export default {
   name: 'App',
   components: {
     //HelloWorld,
    MainLayout
   }
+ 
+  
 }
 </script>
 <style lang="scss">

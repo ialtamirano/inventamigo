@@ -1,20 +1,20 @@
 import http from "../http-common";
 
 
-class PartDataService {
+class BasketDataService {
 
   getAll() {
-    return http.get("/parts/");
+    return http.get("/baskets/");
   }
 
  // eslint-disable-next-line no-unused-vars  
   get(id) {
-    return http.get("/parts/"+id);
+    return http.get("/baskets/"+id);
   }
 
   // eslint-disable-next-line no-unused-vars  
   search(query) {
-    return http.get("/parts/search/"+query.name,{
+    return http.get("/basket/search/"+query.name,{
       params: {
         category_id: query.category_id
     }
@@ -22,20 +22,20 @@ class PartDataService {
   }
 
   create(data) {
-    return http.post("/parts/", data);
+    return http.post("/baskets/", data);
   }
   // eslint-disable-next-line no-unused-vars  
   update(id, data) {
     
-    return http.put("/parts/"+id, data);
+    return http.put("/baskets/"+id, data);
   }
 
   // eslint-disable-next-line no-unused-vars
   delete(id) {
-    return http.delete("/parts/"+id);
+    return http.delete("/baskets/"+id);
   }
 
 
 }
 
-export default new PartDataService();
+export default new BasketDataService();
