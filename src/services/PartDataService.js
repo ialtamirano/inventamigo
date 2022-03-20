@@ -4,17 +4,17 @@ import http from "../http-common";
 class PartDataService {
 
   getAll() {
-    return http.get("/parts/");
+    return http.get("/partnumbers/");
   }
 
  // eslint-disable-next-line no-unused-vars  
   get(id) {
-    return http.get("/parts/"+id);
+    return http.get("/partnumbers/"+id);
   }
 
   // eslint-disable-next-line no-unused-vars  
   search(query) {
-    return http.get("/parts/search/"+query.name,{
+    return http.get("/partnumbers/search/"+query.name,{
       params: {
         category_id: query.category_id
     }
@@ -22,17 +22,17 @@ class PartDataService {
   }
 
   create(data) {
-    return http.post("/parts/", data);
+    return http.post("/partnumbers/", data);
   }
   // eslint-disable-next-line no-unused-vars  
   update(id, data) {
     
-    return http.put("/parts/"+id, data);
+    return http.put("/partnumbers/"+id, data);
   }
 
   // eslint-disable-next-line no-unused-vars
   delete(id) {
-    return http.delete("/parts/"+id);
+    return http.delete("/partnumbers/"+id);
   }
 
 

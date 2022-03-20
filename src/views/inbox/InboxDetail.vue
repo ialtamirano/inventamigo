@@ -1,14 +1,12 @@
 <template>
+
+
+<div class="box">
+  <h1 class="title is-4 mb-2 "><router-link :to="{ name: 'inbox-list'}" class="" ><span class="has-text-primary is-underlined">Inbox</span></router-link> / Mensaje</h1>
+
+  
    <div class="level ">
-    <div class="level-left ">
-      <router-link :to="{ name: 'inbox-list'}"  class="button is-primary is-rounded is-outlined">
-          <span class="icon">
-          <i class="fas fa-chevron-left"></i>
-        </span>
-        <span>Back</span>
-          
-      </router-link>
-    </div> 
+     
     <div class="level-item has-text-centered">
         <h1 class="title is-4 mb-2">{{ currentInbox.subject }}</h1>
     </div>       
@@ -70,7 +68,7 @@
   </div>
     
     
-   
+ </div>  
 </template>
 <script>
 import InboxDataService from "../../services/InboxDataService";

@@ -1,25 +1,28 @@
 <template>
-  <div class="level ">
-    <div class="level-left">
-            <router-link :to="{ name: 'parts-list'}"  class="button is-primary is-rounded is-outlined">
-             <span class="icon">
-             
-              <i class="fas fa-chevron-left"></i>
-            </span>
-            <span>Back</span>
-              
-              </router-link>
-
+<div class="box">
+    <div class="level ">
+        <div class="level-left">
+           <h1 class="title is-4 mb-2 "><router-link :to="{ name: 'parts-list'}" class="" ><span class="has-text-primary">Numeros de parte</span></router-link> / Edici&oacute;n</h1>
+    
+        </div>
+        <div class="level-right">
+            <button  class="button is-primary" @click="editFields">
+              <span class="icon">
+                <i class="fas fa-tools"> </i>
+              </span>
+              <span>
+                Personalizar
+              </span>
+            </button>
+                
         </div>        
-  </div>
-  <div>
-    <h1 class="title is-centered"> Numeros de parte</h1> 
-  </div> 
+    </div>
+
   <div  v-if="currentPart" >
     
     <form class="">
       <div class="field">
-        <label class="label" for="code">Codigo</label>
+        <label class="label" for="code">C&oacute;digo / Numero de parte</label>
         <input type="text" class="input" id="code"
           v-model="currentPart.code"
         />
@@ -55,7 +58,9 @@
           </p>
        </div>
     </form>
+    
 
+     <dynamic-form :form="form" @change="valueChanged" />
     <p>{{ message }}</p>
   </div>
 
@@ -63,10 +68,21 @@
     <br />
     <p>Please click on a Part...</p>
   </div>
+  </div>
 </template>
 
 <script>
 import PartDataService from "../../services/PartDataService";
+
+
+import {
+  CheckboxField,
+  TextField,
+  SelectField,
+} from '@asigloo/vue-dynamic-forms';
+
+
+
 
 export default {
   name: "edit-part",
@@ -107,23 +123,65 @@ export default {
     },
     
     deletePart() {
-      let self = this;
-      PartDataService.delete(this.currentPart.id)
-        .then(response => {
-          console.log(response.data);
-          self.$router.go(-1);
-        })
-        .catch(e => {
-          console.log(e);
-           alert(e.response.data.error.description);
-        });
-    }
+      let result = confirm("Esta seguro de eliminar este numero de parte?");
+      event.preventDefault();
+      if(result){
+        let self = this;
+        PartDataService.delete(this.currentPart.id)
+            .then(response => {
+              console.log(response.data);
+              self.$router.go(-1);
+            })
+            .catch(e => {
+              console.log(e);
+              alert(e.response.data.error.description);
+            });
+        }
+        else {
+          return;
+        }
+      },
+
+     valueChanged(values) {
+      console.log('Values', values);
+    }  
+      
   },
   mounted() {
     this.message = '';
     this.getPart(this.$route.params.id);
+    const form = ref({
+      id: 'basic-demo',
+      fields: {
+        username: TextField({
+          label: 'Username',
+        }),
+        games: SelectField({
+          label: 'Games',
+          options: [
+            {
+              value: 'the-last-of-us',
+              label: 'The Last of Us II',
+            },
+            {
+              value: 'death-stranding',
+              label: 'Death Stranding',
+            },
+            {
+              value: 'nier-automata',
+              label: 'Nier Automata',
+            },
+          ],
+        }),
+        checkIfAwesome: CheckboxField({
+          label: 'Remember Me',
+        }),
+      },
+    });
     
   }
+  
+    
 };
 </script>
 

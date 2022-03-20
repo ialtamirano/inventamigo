@@ -1,7 +1,7 @@
 <template>
     <nav class="navbar is-link is-fixed-top">   
         <div class="container">   
-            <div class=" navbar-brand">
+            <div class="navbar-brand">
                 <router-link class="navbar-item" :to="'/'">
                     <img src="../assets/img/inventamigo_logo_snake_white.png" >                    
                 </router-link>
@@ -11,12 +11,30 @@
                     <span aria-hidden="true"></span>
                 </a>
             </div> 
-            <div class="navbar-menu is-hidden-mobile" v-if="loggedIn"> 
+            <div class="navbar-menu is-hidden-mobile" v-if="loggedIn">                    
+                <a class="navbar-item has-text-white" :to="'/'">
+                        
+                    <span class="icon">
+                        <i class="fas fa-home"></i>
+                    </span> 
+                    
+                    <span class="is-hidden-tablet-only is-hidden-desktop-only">
+                        Inicio
+                    </span>
+                        
+                </a>                    
+                    
+                
                 <div class="navbar-item  has-dropdown is-hoverable ">
                     <a class="navbar-link bd-navbar-ellipsis has-text-white" :to="'/'">
+                    
                         <span class="icon">
-                            <i class="fas fa-ellipsis-h"></i>
+                            
+                            <i class="fas fa-fire"></i>
                         </span>
+                         <span class="is-hidden-tablet-only is-hidden-desktop-only">
+                                Actividades
+                            </span>
                     </a>
                     <div class="navbar-dropdown bd-navbar-dropdown is-boxed">
                         <router-link class="navbar-item" data-route="" :to="'/parts/search'">
@@ -26,7 +44,7 @@
                                                 <i class="fas fa-tags"></i>
                                             </span>
                                             <span>
-                                                <strong>Buscar en mi catalogo</strong>
+                                                <strong>Compartir mi catalogo </strong>
                                             </span>
                                             </div>
                                             Busqueda de articulos, catalogo, canastas..
@@ -63,6 +81,63 @@
 
                     </div>
                 </div>
+
+                <div class="navbar-item has-dropdown is-hoverable" :to="'/'">
+                        <a class="navbar-link bd-navbar-ellipsis has-text-white" :to="'/'">
+                    
+                            <span class="icon">
+
+                                <i class="fas fa-hand-holding-heart"></i>
+                            </span>
+                            <span class="is-hidden-tablet-only is-hidden-desktop-only">
+                                Mis Cosas
+                            </span>
+                        </a>
+                        <div class="navbar-dropdown bd-navbar-dropdown is-boxed">
+                        <router-link class="navbar-item" data-route="" :to="'/parts'">
+                                        <div>
+                                            <div class="icon-text">
+                                            <span class="icon has-text-link-dark">
+                                                <i class="fas fa-tags"></i>
+                                            </span>
+                                            <span>
+                                                <strong>Mis articulos</strong>
+                                            </span>
+                                            </div>
+                                           
+                                        </div>
+                        </router-link>
+                        <hr class="navbar-divider ">
+                        <router-link class="navbar-item" data-route="" :to="'/customers'">
+                            <div>
+                                <div class="icon-text">
+                                <span class="icon has-text-success">
+                                    <i class="fas fa-bookmark"></i>
+                                </span>
+                                <span>
+                                    <strong>Mis Clientes</strong>
+                                </span>
+                                </div>
+                                Agrega nuevos clientes, direcciones, informacion de contacto...
+                            </div>
+                        </router-link>
+                        <hr class="navbar-divider ">
+                        <router-link class="navbar-item"  :to="{ name: 'locations-list'}" >
+                            <div>
+                                <div class="icon-text">
+                                <span class="icon has-text-danger">
+                                    <i class="fas fa-cubes"></i>
+                                </span>
+                                <span>
+                                    <strong>Manejar mi inventario</strong>
+                                </span>
+                                </div>
+                                Administrar mis entradas, salidas, transferencias, locaciones,...
+                            </div>
+                        </router-link>                    
+
+                    </div> 
+                    </div>
                 <div class="navbar-item">
                     <SearchBar></SearchBar>
                 </div>
@@ -83,9 +158,9 @@
                 <div class="navbar-end">
                     <div class="navbar-item">
                         <div class="buttons">
-                        <a class="button is-primary">
+                        <router-link class="button is-primary" :to="'/signup'">
                             <strong>Sign up</strong>
-                        </a>
+                        </router-link>
                         <a class="button is-light">
                             Log in
                         </a>

@@ -1,14 +1,16 @@
 <template>
+<div class="box">
+     <h1 class="title is-4 mb-2 "> Numeros de parte</h1>
     <div class="level ">
         <div class="level-left ">
-        <h1 class="title is-4 mb-2">Numeros de parte</h1> 
-        </div>
-        <div class="level-right">
             <router-link :to="{ name: 'parts-create'}"  class="button is-link is-rounded is-outlined">
                 <span class="icon">
                     <i class="fas fa-plus"></i>
                 </span> 
             <span>Agregar </span></router-link>
+        </div>
+        <div class="level-right">
+           
             
         </div>
     </div>
@@ -22,7 +24,7 @@
                        <img src="https://bulma.io/images/placeholders/64x64.png">
                         </figure>
                         </td>
-                        <td><span class="is-size-5"> <router-link :to="'/partes/'+part.id">  {{part.name}}</router-link></span>  </td>
+                        <td><span class="is-size-5"> <router-link :to="'/parts/'+part.id">  {{part.name}}</router-link></span>  </td>
                         
                         <td>
                             <router-link :to="{ name: 'parts-edit', params: { id: part.id }}"   class="badge badge-warning"><span class="icon is-edit"><i class="fas fa-edit"></i></span>Edit</router-link>
@@ -32,7 +34,7 @@
         </table>
                         
     </div>
-   
+</div>
 </template>
 <script>
 
@@ -57,11 +59,13 @@ export default {
       retrieveParts(){
         PartDataService.getAll()
         .then( response => {
+            console.log(response.data.data);
             this.parts = response.data.data;
+            
         })
         .catch(e => {
-            console.log(e.response);
-            alert(e.response.data.error.description);
+            console.log(e);
+            alert(e.response.data.description);
         })
       },
       refreshList(){

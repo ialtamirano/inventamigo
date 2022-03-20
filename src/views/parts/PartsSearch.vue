@@ -1,6 +1,7 @@
 <template>
-       
-        <h1 class="title is-4 mb-2">Mi catalogo</h1> 
+
+ <div class="box">      
+        <h1 class="title is-4 mb-2">Busqueda</h1> 
 
             <!-- Start Search bar -->
             <div class="field has-addons">
@@ -24,7 +25,8 @@
                 <div class="list-item" v-for="part in parts" :key="part.id">
                     <div class="list-item-image">
                         <figure class="image is-64x64">
-                            <img v-bind:src="part.image_url" >
+                            <!--<img v-bind:src="part.image_url" >-->
+                            <img src="https://picsum.photos/64">
                         </figure>
                     </div>
                     
@@ -152,7 +154,7 @@
                 <button class="modal-close is-large" aria-label="close" @click="closeModal"></button>
                 
             </div>
-    
+ </div>
 </template>
 <script>
 

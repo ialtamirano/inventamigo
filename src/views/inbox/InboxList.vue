@@ -1,7 +1,7 @@
-<template>
+<template >  
+ <div class="box">
    
-   
-  <div  id="messages" data-example>
+    <div  id="messages" data-example>
     <h1 class="title is-4 mb-2">Inbox</h1>
     
     <div class="list has-hoverable-list-items has-overflow-ellipsis">
@@ -53,10 +53,7 @@
             </button>
           </div>
         </div>
-      
-      </div>
-      
-      
+      </div>    
     </div>
   </div>
     <section class="info-tiles">
@@ -87,7 +84,7 @@
             </div>
         </div>
     </section>
-   
+   </div>
 </template>
 <script>
 
@@ -102,7 +99,7 @@ import InboxDataService from "../../services/InboxDataService"
 export default {
   name:"inbox-list",
   components : {
-    //TimeAgo,
+    
   },
 
   data: () =>({

@@ -1,33 +1,15 @@
 <template>
+<div class="box" >
+  <h1 class="title is-4 mb-2 "><router-link :to="{ name: 'parts-search'}" class="" ><span class="has-text-primary">Busqueda</span></router-link> / Canasta</h1>
   <div class="level ">
-    <div class="level-left">
-            <router-link :to="{ name: 'parts-search'}"  class="button is-primary is-rounded is-outlined">
-              <span class="icon">              
-                <i class="fas fa-chevron-left"></i>
-              </span>
-              <span>Back</span>             
-            </router-link>
-    </div>
+
     <div class="level-right">
       <div clas="level-item">
-        <div class="field copy-link-control has-addons">       
-          <div class="control is-expanded">
-                  <input type="text" class="input  is-rounded" id="code" ref="clone"
-                    v-model="currentUrl" v-on:focus="$event.target.select()"
-                  />
-          </div>
-          <div class="control">
-              <a class="button is-success is-rounded" @click="copyLink">
-                <i class="fas fa-copy"></i>&nbsp; Copiar link
-              </a>
-          </div>
-        </div>
+        
       </div>
     </div>
   </div>
-  <div>
-    <h1 class="title is-centered"><i class="fas fa-basket"></i> Canasta </h1> 
-  </div> 
+ 
   <div  v-if="currentBasket" >
     <form class="form">
       <article class="media">      
@@ -85,6 +67,18 @@
                       Update
                     </button>
                 </p>
+                <div class="field copy-link-control has-addons">       
+                  <div class="control is-expanded">
+                          <input type="text" class="input  is-rounded" id="code" ref="clone"
+                            v-model="currentUrl" v-on:focus="$event.target.select()"
+                          />
+                  </div>
+                  <div class="control">
+                      <a class="button is-success is-rounded" @click="copyLink">
+                        <i class="fas fa-copy"></i>&nbsp; Copiar link
+                      </a>
+                  </div>
+                </div>
               </div>
             </div>
             <div class="level-right">
@@ -111,6 +105,7 @@
     <br />
     <p>La canasta esta vacia</p>
   </div>
+   </div>
 </template>
 
 <script>

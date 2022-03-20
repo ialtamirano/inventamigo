@@ -1,5 +1,4 @@
-<template>
-  
+<template> 
   <MainContainer></MainContainer>
 </template>
 

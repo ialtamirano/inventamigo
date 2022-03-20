@@ -1,7 +1,8 @@
 //import { createApp } from 'vue'
-import { createApp } from 'vue/dist/vue.esm-bundler';
+import { createApp } from 'vue/dist/vue.esm-bundler'
 import App from './App.vue'
 import auth from './auth'
+//import { createDynamicForms } from '@asigloo/vue-dynamic-forms'
 
 import mitt from 'mitt';
 const emitter = mitt();
@@ -25,6 +26,7 @@ import './assets/css/fontawesome-free-5.15.4-web/css/all.min.css'
 import InboxPage from './views/inbox/InboxList.vue'
 import AboutPage from './views/About.vue'
 import Login from './views/Login.vue'
+import Signup from './views/Signup.vue'
 
 
 function requireAuth (to, from, next) {
@@ -55,6 +57,11 @@ const baseRoutes = [
     component: Login,//shsould be imported 
    
   },
+  {
+    path: '/signup',
+    component: Signup,//shsould be imported 
+   
+  },
   { path: '/logout',
       beforeEnter (to, from, next) {
         auth.logout()
@@ -71,6 +78,11 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
 })
+
+//const VueDynamicForms = createDynamicForms()
+
+
+
 
 const app = createApp(App).use(router);
 

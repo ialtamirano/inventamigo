@@ -1,12 +1,11 @@
 <template>
-
 <div class="columns is-mobile">
-    <div class="column is-half is-offset-one-quarter box">
-      <h2>Login</h2>
+    <div class="column is-half is-offset-one-quarter">
+      <h2>Sign up</h2>
       <p v-if="$route.query.redirect">
         You need to login first.
       </p>
-      <form @submit.prevent="login">
+      <form @submit.prevent="signup">
       <div class="field">
       <p class="control has-icons-left has-icons-right">
           <input class="input" type="email" v-model="email" placeholder="Email">
@@ -26,13 +25,21 @@
           </span>
       </p>
       </div>
+         <div class="field">
+      <p class="control has-icons-left">
+          <input class="input" type="password" v-model="confirm" placeholder="Confirm Password">
+          <span class="icon is-small is-left">
+          <i class="fas fa-lock"></i>
+          </span>
+      </p>
+      </div>
       <div class="field">
       <p class="control">
           <button type="submit" class="button is-success">
-          Login
+          Register
           </button>
       </p>
-      <p v-if="error" class="error">{{ error_message }}</p>
+      <p v-if="error" class="error">Bad login information</p>
       </div>
   </form>
 
@@ -48,37 +55,20 @@ export default {
     return {
       email: '',
       pass: '',
-      error: false,
-      error_message:""
+      confirmpass: '',
+      error: false
     }
   },
   methods: {
-    login () {
+    singup () {
 
-      if(this.email.trim() ==""){
-        this.error_message = "Ingrese un correo electrónico valido";
-        this.error = true;
-        return;
-      }
-
-       if(this.pass.trim() ==""){
-        this.error_message = "Ingrese una contraseña valida";
-        this.error = true;
-        return;
-      }
       
-      auth.login(this.email, this.pass, loggedIn => {
-
-        console.log("callback");
-        console.log(loggedIn);
-
-        if (!loggedIn) {
-          this.error_message = "El usuario o contraseña son invalidos!";
+      auth.singup(this.email, this.pass,this.confirmpass, signupCallback => {
+        if (!signupCallback) {
           this.error = true
         } else {
           this.$router.replace(this.$route.query.redirect || '/')
         }
-
       })
     }
   }
