@@ -2,7 +2,7 @@
 <div class="box">
     <div class="level ">
         <div class="level-left">
-           <h1 class="title is-4 mb-2 "><router-link :to="{ name: 'parts-list'}" class="" ><span class="has-text-primary is-underlined">Numeros de parte</span></router-link>&gt;Edici&oacute;n</h1>
+           <h1 class="title is-4 mb-2 "><router-link :to="{ name: 'parts-list'}" class="" ><span class="has-text-primary ">Numeros de parte</span></router-link> / Edici&oacute;n</h1>
     
         </div>
         <div class="level-right">
@@ -19,7 +19,6 @@
     </div>
 
   <div  v-if="currentPart" >
-    
    
      <form class="">
       <div class="field">

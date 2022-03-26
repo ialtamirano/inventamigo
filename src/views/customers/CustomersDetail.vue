@@ -2,7 +2,7 @@
 <div class="box">
   <div class="level ">
     <div class="level-left">
-        <h1 class="title is-4 mb-2 "><router-link :to="{ name: 'customers-list'}"  ><span class="has-text-primary is-underlined">Clientes</span></router-link>/Edici&oacute;n</h1>
+        <h1 class="title is-4 mb-2 "><router-link :to="{ name: 'customers-list'}"  ><span class="has-text-primary ">Clientes</span></router-link> / Edici&oacute;n</h1>
             
 
         </div>        
