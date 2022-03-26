@@ -2,7 +2,7 @@
 import { createApp } from 'vue/dist/vue.esm-bundler'
 import App from './App.vue'
 import auth from './auth'
-//import { createDynamicForms } from '@asigloo/vue-dynamic-forms'
+import { createDynamicForms } from '@asigloo/vue-dynamic-forms'
 
 import mitt from 'mitt';
 const emitter = mitt();
@@ -12,6 +12,7 @@ const emitter = mitt();
 import locationRoutes from './router/location-router'
 import inboxRoutes from './router/inbox-router'
 import partRoutes from './router/part-router'
+import customerRoutes from './router/customer-router'
 import basketRoutes from './router/basket-router'
 import {createRouter, createWebHistory} from 'vue-router'  
 //import VueMoment from 'vue-moment'
@@ -71,7 +72,7 @@ const baseRoutes = [
   
 ]
 
-const routes = baseRoutes.concat(locationRoutes).concat(inboxRoutes).concat(partRoutes).concat(basketRoutes);
+const routes = baseRoutes.concat(locationRoutes).concat(inboxRoutes).concat(partRoutes).concat(basketRoutes).concat(customerRoutes);
 
 
 const router = createRouter({
@@ -79,12 +80,12 @@ const router = createRouter({
   routes
 })
 
-//const VueDynamicForms = createDynamicForms()
+const VueDynamicForms = createDynamicForms()
 
 
 
 
-const app = createApp(App).use(router);
+const app = createApp(App).use(router).use(VueDynamicForms);
 
 app.config.globalProperties.emitter = emitter;
 

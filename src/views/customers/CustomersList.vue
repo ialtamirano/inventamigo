@@ -1,14 +1,17 @@
 <template>
+<div class="box">
+     <h1 class="title is-centered">Clientes</h1> 
     <div class="level ">
         <div class="level-left ">
-        <h1 class="title is-centered">Clientes</h1> 
-        </div>
-        <div class="level-right">
             <router-link :to="{ name: 'customers-create'}"  class="button is-link is-rounded is-outlined">
                 <span class="icon">
                     <i class="fas fa-plus"></i>
                 </span> 
-            <span>Agregar </span></router-link>
+                <span>Agregar </span>
+            </router-link>
+        </div>
+        <div class="level-right">
+            
             
         </div>
     </div>
@@ -18,7 +21,7 @@
             <tbody>
                 <tr v-for="customer in customers" :key="customer.id">
                         <td width="5%"></td>
-                        <td><span class="is-size-5"> <router-link :to="'/clientes/'+customer.id">  {{customer.name}}</router-link></span>  </td>
+                        <td><span class="is-size-5"> <router-link :to="'/customers/'+customer.id">  {{customer.name}}</router-link></span>  </td>
                         
                         <td>
                             <router-link :to="{ name: 'customers-edit', params: { id: customer.id }}"   class="badge badge-warning"><span class="icon is-edit"><i class="fas fa-edit"></i></span>Edit</router-link>
@@ -28,7 +31,7 @@
         </table>
                         
     </div>
-   
+</div>
 </template>
 <script>
 

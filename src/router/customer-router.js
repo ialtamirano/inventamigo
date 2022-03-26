@@ -1,6 +1,6 @@
-import LocationsList from '../views/customers/CustomerList.vue'
-import CustomerCreate from '../views/customers/CustomerCreate.vue'
-import CustomerDetail from '../views/customers/CustomerDetail.vue'
+import CustomerList from '../views/customers/CustomersList.vue'
+import CustomerCreate from '../views/customers/CustomersCreate.vue'
+import CustomerDetail from '../views/customers/CustomersDetail.vue'
 
 export default [
   {

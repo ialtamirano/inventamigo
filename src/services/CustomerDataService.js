@@ -12,6 +12,15 @@ class CustomerDataService {
     return http.get("/customers/"+id);
   }
 
+  // eslint-disable-next-line no-unused-vars  
+  search(query) {
+    return http.get("/customers/search/"+query.name,{
+      params: {
+        
+    }
+    });
+  }
+
   create(data) {
     return http.post("/customers/", data);
   }

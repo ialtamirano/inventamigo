@@ -11,7 +11,7 @@
         </div>        
   </div>
   <div>
-    <h1 class="title is-centered"> Nuevo Ciente/h1> 
+    <h1 class="title is-centered"> Nuevo Ciente</h1> 
   </div> 
       <form class="">
         <div class="field">

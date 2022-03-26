@@ -1,20 +1,13 @@
 <template>
+<div class="box">
   <div class="level ">
     <div class="level-left">
-            <router-link :to="{ name: 'customers-list'}"  class="button is-primary is-rounded is-outlined">
-             <span class="icon">
-             
-              <i class="fas fa-chevron-left"></i>
-            </span>
-            <span>Back</span>
-              
-              </router-link>
+        <h1 class="title is-4 mb-2 "><router-link :to="{ name: 'customers-list'}"  ><span class="has-text-primary is-underlined">Clientes</span></router-link>/Edici&oacute;n</h1>
+            
 
         </div>        
   </div>
-  <div>
-    <h1 class="title is-centered"> Clientes</h1> 
-  </div> 
+
   <div  v-if="currentCustomer" >
     
     <form class="">
@@ -63,6 +56,7 @@
     <br />
     <p>Please click on a Customer...</p>
   </div>
+  </div>
 </template>
 
 <script>
@@ -96,7 +90,7 @@ export default {
           
           console.log(response.data);
           
-          this.message = 'The customer was updated successfully!';
+          this.message = 'El cliente se actualizo correctamente!';
           self.$router.push({name:'customers-list'});
          
         })

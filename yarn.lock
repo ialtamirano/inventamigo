@@ -2,13 +2,13 @@
 # yarn lockfile v1
 
 
-"@asigloo/vue-dynamic-forms@^3.18.3":
-  version "3.18.1"
-  resolved "https://registry.yarnpkg.com/@asigloo/vue-dynamic-forms/-/vue-dynamic-forms-3.18.1.tgz#5f4f81c166380e705ba4fefe395c31526a176fda"
-  integrity sha512-44pIMoKz7GVLfmiSfHA18iuWnrOz5bYhm/O5o/i4ffzT6lV4DgVkm5gbKhoEWzSBOa/c63EgaeHIVKeR0IVszQ==
+"@asigloo/vue-dynamic-forms@^3.12.0":
+  version "3.12.0"
+  resolved "https://registry.yarnpkg.com/@asigloo/vue-dynamic-forms/-/vue-dynamic-forms-3.12.0.tgz#f9f869e57d8d60b9cea6270601b02fe66380a4f5"
+  integrity sha512-yVPlaBNhIEKCj66haRiErCGFYtl5NhP5WgrsL69M80JefdCfpzZ8FQCJ4ehEG5npXQs4js1Y1yrm23ND6ilVcQ==
   dependencies:
     deep-clone "^3.0.3"
-    deep-object-diff "^1.1.7"
+    deep-object-diff "^1.1.0"
 
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.16.0":
   version "7.16.0"
@@ -2089,9 +2089,9 @@ babel-eslint@^10.1.0:
     eslint-visitor-keys "^1.0.0"
     resolve "^1.12.0"
 
-babel-loader@^8.1.0:
+babel-loader@^8.1.0, babel-loader@^8.2.3:
   version "8.2.3"
-  resolved "https://registry.npmjs.org/babel-loader/-/babel-loader-8.2.3.tgz"
+  resolved "https://registry.yarnpkg.com/babel-loader/-/babel-loader-8.2.3.tgz#8986b40f1a64cacfcb4b8429320085ef68b1342d"
   integrity sha512-n4Zeta8NC3QAsuyiizu0GkmRcQ6clkV9WFUnUf1iXP//IeSKbWjofW3UHyZVwlOB4y039YQKefawyTn64Zwbuw==
   dependencies:
     find-cache-dir "^3.3.1"
@@ -3349,7 +3349,7 @@ deep-is@~0.1.3:
   resolved "https://registry.npmjs.org/deep-is/-/deep-is-0.1.4.tgz"
   integrity sha512-oIPzksmTg4/MriiaYGO+okXDT7ztn/w3Eptv/+gSIdMdKsJo0u4CfYNFJPy+4SKMuCqGw2wxnA+URMg3t8a/bQ==
 
-deep-object-diff@^1.1.7:
+deep-object-diff@^1.1.0:
   version "1.1.7"
   resolved "https://registry.yarnpkg.com/deep-object-diff/-/deep-object-diff-1.1.7.tgz#348b3246f426427dd633eaa50e1ed1fc2eafc7e4"
   integrity sha512-QkgBca0mL08P6HiOjoqvmm6xOAl2W6CT2+34Ljhg0OeFan8cwlcdq8jrLKsBBuUFAZLsN5b6y491KdKEoSo9lg==

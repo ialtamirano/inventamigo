@@ -2,7 +2,7 @@
 <div class="box">
     <div class="level ">
         <div class="level-left">
-           <h1 class="title is-4 mb-2 "><router-link :to="{ name: 'parts-list'}" class="" ><span class="has-text-primary">Numeros de parte</span></router-link> / Edici&oacute;n</h1>
+           <h1 class="title is-4 mb-2 "><router-link :to="{ name: 'parts-list'}" class="" ><span class="has-text-primary is-underlined">Numeros de parte</span></router-link>&gt;Edici&oacute;n</h1>
     
         </div>
         <div class="level-right">
@@ -20,7 +20,8 @@
 
   <div  v-if="currentPart" >
     
-    <form class="">
+   
+     <form class="">
       <div class="field">
         <label class="label" for="code">C&oacute;digo / Numero de parte</label>
         <input type="text" class="input" id="code"
@@ -39,6 +40,15 @@
           v-model="currentPart.description"
         />
       </div>
+      <h4>Campos perzonalizados</h4>
+
+       <TextField
+        v-for="post in inputs"
+        :key="post.id"
+        :title="post.title"
+      ></TextField>
+
+      <component :is="TextField"></component>
 
     
 
@@ -57,10 +67,11 @@
               </button>
           </p>
        </div>
-    </form>
-    
 
-     <dynamic-form :form="form" @change="valueChanged" />
+
+    </form>
+
+  
     <p>{{ message }}</p>
   </div>
 
@@ -72,24 +83,26 @@
 </template>
 
 <script>
+
 import PartDataService from "../../services/PartDataService";
-
-
-import {
-  CheckboxField,
-  TextField,
-  SelectField,
-} from '@asigloo/vue-dynamic-forms';
-
+import TextField from "../../components/InputControl";
 
 
 
 export default {
+  components: {
+    TextField
+  },
   name: "edit-part",
   data() {
     return {
       currentPart: null,
-      message: ''
+      message: '',
+      inputs: [
+        { id: 1, title: {label :'My journey with Vue', placeholder:'xxxxxx'} },
+        { id: 2, title: {label:'Blogging with Vue', value:"aasdadsd"} },
+        { id: 3, title: {label:'Why Vue is so fun'} }
+      ]
     };
   },
   methods: {
@@ -142,43 +155,13 @@ export default {
         }
       },
 
-     valueChanged(values) {
-      console.log('Values', values);
-    }  
+
       
   },
   mounted() {
     this.message = '';
     this.getPart(this.$route.params.id);
-    const form = ref({
-      id: 'basic-demo',
-      fields: {
-        username: TextField({
-          label: 'Username',
-        }),
-        games: SelectField({
-          label: 'Games',
-          options: [
-            {
-              value: 'the-last-of-us',
-              label: 'The Last of Us II',
-            },
-            {
-              value: 'death-stranding',
-              label: 'Death Stranding',
-            },
-            {
-              value: 'nier-automata',
-              label: 'Nier Automata',
-            },
-          ],
-        }),
-        checkIfAwesome: CheckboxField({
-          label: 'Remember Me',
-        }),
-      },
-    });
-    
+    console.log(TextField)
   }
   
     
