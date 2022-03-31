@@ -21,6 +21,7 @@
     "tiny-emitter": "^2.1.0",
     "uid": "^2.0.0",
     "vue": "^3.0.0",
+    "vue-dataset": "^3.4.3",
     "vue-moment": "^4.1.0",
     "vue-router": "4",
     "vue-timeago": "^5.1.3",
