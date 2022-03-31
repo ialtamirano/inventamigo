@@ -56,7 +56,7 @@
               <button type="submit" class="button is-success"
                 @click="updatePart"
               >
-                Update
+                Guardar cambios
               </button>
           </p>
           <p class="control ">

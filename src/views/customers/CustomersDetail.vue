@@ -37,7 +37,7 @@
               <button type="submit" class="button is-success"
                 @click="updateLocation"
               >
-                Update
+                Guardar cambios
               </button>
           </p>
           <p class="control ">

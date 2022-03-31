@@ -1,18 +1,23 @@
 <template>
+<div class="box">
  <div class="level ">
-    <div class="level-left">
-            <router-link :to="{ name: 'customers-list'}"  class="button is-primary is-rounded is-outlined">
-             <span class="icon">            
-              <i class="fas fa-chevron-left"></i>
-            </span>
-            <span>Back</span>
-              
-              </router-link>
+        <div class="level-left">
+           <h1 class="title is-4 mb-2 "><router-link :to="{ name: 'parts-list'}" class="" ><span class="has-text-primary ">Clientes</span></router-link> / Nuevo</h1>
+    
+        </div>
+        <div class="level-right">
+            <button  class="button is-primary" @click="editFields">
+              <span class="icon">
+                <i class="fas fa-tools"> </i>
+              </span>
+              <span>
+                Personalizar
+              </span>
+            </button>
+                
         </div>        
-  </div>
-  <div>
-    <h1 class="title is-centered"> Nuevo Ciente</h1> 
-  </div> 
+    </div>
+
       <form class="">
         <div class="field">
           <label class="label">Codigo</label>
@@ -34,12 +39,12 @@
         </div>
         <div class="field is-grouped">
           <p class="control">
-            <button class="button is-primary" @click="saveCustomer">Guardar</button>
+            <button class="button is-primary" @click="saveCustomer">Guardar </button>
           </p>
       
         </div>
 </form>
- 
+</div> 
 </template>
 <script>
 
