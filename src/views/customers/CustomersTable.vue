@@ -10,7 +10,7 @@
             :class="[onlineFilter === '' && 'active']"
             @click.prevent="onlineFilter = ''"
           >
-            <span class="badge bg-white text-secondary">{{ users.length }}</span> All
+            <span class="badge bg-white text-secondary">{{ customers.length }}</span> All
           </button>
           <button
             type="button"
@@ -18,7 +18,7 @@
             :class="[onlineFilter === 'Active' && 'active']"
             @click.prevent="onlineFilter = 'Active'"
           >
-            <span class="badge bg-success text-white">{{ filterList(users, { onlineStatus: 'Active' }).length }}</span> Active
+            <span class="badge bg-success text-white">{{ filterList(customers, { onlineStatus: 'Active' }).length }}</span> Active
           </button>
           <button
             type="button"
@@ -26,7 +26,7 @@
             :class="[onlineFilter === 'Away' && 'active']"
             @click.prevent="onlineFilter = 'Away'"
           >
-            <span class="badge bg-warning text-white">{{ filterList(users, { onlineStatus: 'Away' }).length }}</span> Away
+            <span class="badge bg-warning text-white">{{ filterList(customers, { onlineStatus: 'Away' }).length }}</span> Away
           </button>
           <button
             type="button"
@@ -34,7 +34,7 @@
             :class="[onlineFilter === 'Do not disturb' && 'active']"
             @click.prevent="onlineFilter = 'Do not disturb'"
           >
-            <span class="badge bg-danger text-white">{{ filterList(users, { onlineStatus: 'Do not disturb' }).length }}</span>
+            <span class="badge bg-danger text-white">{{ filterList(customers, { onlineStatus: 'Do not disturb' }).length }}</span>
             Do not disturb
           </button>
           <button
@@ -43,7 +43,7 @@
             :class="[onlineFilter === 'Invisible' && 'active']"
             @click.prevent="onlineFilter = 'Invisible'"
           >
-            <span class="badge bg-secondary text-white">{{ filterList(users, { onlineStatus: 'Invisible' }).length }}</span>
+            <span class="badge bg-secondary text-white">{{ filterList(customers, { onlineStatus: 'Invisible' }).length }}</span>
             Invisible
           </button>
         </div>
@@ -70,7 +70,7 @@
     <hr />
     <dataset
       v-slot="{ ds }"
-      :ds-data="users"
+      :ds-data="customers"
       :ds-filter-fields="{ onlineStatus: onlineFilter, name: startsWithFilter }"
       :ds-sortby="[sortFirstName]"
       :ds-search-in="['balance', 'birthdate', 'name', 'company', 'email', 'phone', 'address', 'favoriteAnimal']"
@@ -119,7 +119,7 @@
 
 
 <script>
-//import users from '../../../example-data/users.json'
+//import customers from '../../../example-data/customers.json'
 import CustomerDataService from "../../services/CustomerDataService"
 import { filterList, clone, isoDateToEuroDate, searchAsEuroDate } from '../utilities'
 import { debounce } from '../../../src/helpers'
@@ -128,7 +128,7 @@ export default {
   name: 'Example2',
   data: function () {
     return {
-      users: users,
+      customers: [],
       startsWith: '',
       onlineFilter: '',
       statusClass: {
@@ -160,7 +160,7 @@ export default {
     retrieveCustomers(){
         CustomerDataService.getAll()
         .then( response => {
-            this.users = response.data.data;
+            this.customers = response.data.data;
         })
         .catch(e => {
             console.log(e.response);
@@ -168,8 +168,8 @@ export default {
         })
     },
     updateData() {
-      const updatedUsers = clone(users).slice(5, 10)
-      this.users = updatedUsers
+      const updatedUsers = clone(customers).slice(5, 10)
+      this.customers = updatedUsers
     },
     startsWithFilter(value) {
       return value.toLowerCase().startsWith(this.startsWith.toLowerCase())

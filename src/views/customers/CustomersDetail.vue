@@ -12,7 +12,7 @@
     
     <form class="">
       <div class="field">
-        <label class="label" for="code">Codigo</label>
+        <label class="label" for="code">Numero Cliente:</label>
         <input type="text" class="input" id="code"
           v-model="currentCustomer.code"
         />
