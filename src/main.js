@@ -1,6 +1,7 @@
 //import { createApp } from 'vue'
 import { createApp } from 'vue/dist/vue.esm-bundler'
 import App from './App.vue'
+import CommentBox from './components/CommentBox.vue'
 import auth from './auth'
 import { createDynamicForms } from '@asigloo/vue-dynamic-forms'
 
@@ -18,8 +19,7 @@ import partRoutes from './router/part-router'
 import customerRoutes from './router/customer-router'
 import basketRoutes from './router/basket-router'
 import {createRouter, createWebHistory} from 'vue-router'  
-//import VueMoment from 'vue-moment'
-//import moment from 'moment-timezone'
+
 
 
 
@@ -91,5 +91,5 @@ const VueDynamicForms = createDynamicForms()
 const app = createApp(App).use(router).use(VueDynamicForms);
 
 app.config.globalProperties.emitter = emitter;
-
+app.component('CommentBox',CommentBox);
 app.mount('#app')

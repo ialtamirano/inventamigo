@@ -82,52 +82,8 @@
 </div>
 <div class="columns">
   <div class="column">
-
-      <span  v-for="commentItem in currentCustomer.commentList" :key="commentItem.id">
-
-
-       
-      </span>
-
-
-        <article class="media" v-for="commentItem in currentCustomer.commentList" :key="commentItem.id">
-          <figure class="media-left">
-            <p class="image is-64x64">
-              <img src="https://bulma.io/images/placeholders/128x128.png">
-            </p>
-          </figure>
-          <div class="media-content">
-            <div class="content">
-              <p>
-                <strong>{{commentItem.createdby}}</strong>
-                <br>
-                {{commentItem.text}}
-                <br>
-                <small><a>Like</a> · <a>Reply</a> · {{ moment(currentItem.created) }} 3 hrs</small>
-              </p>
-            </div>
-          </div>
-        </article>
-
-        <article class="media">
-          <figure class="media-left">
-            <p class="image is-64x64">
-              <img src="https://bulma.io/images/placeholders/128x128.png">
-            </p>
-          </figure>
-          <div class="media-content">
-            <div class="field">
-              <p class="control">
-                <textarea class="textarea" placeholder="Add a comment..."></textarea>
-              </p>
-            </div>
-            <div class="field">
-              <p class="control">
-                <button class="button">Post comment</button>
-              </p>
-            </div>
-          </div>
-        </article>
+    Comentarios y Notas:
+      <CommentBox id="CustomerComments"  entityName="customer" :entityId="currentCustomer.id" />   
   </div>
   <div class="column"></div>
 </div>
@@ -197,10 +153,14 @@
 
 <script>
 
+ //eslint-disable-next-line no-unused-vars 
+import CommentBox from "@/components/CommentBox.vue";
+
+
 import CustomerDataService from "../../services/CustomerDataService";
-import CommentDataService from "../../services/CommentDataService";
+
 import TextField from "../../components/InputControl";
-import moment from 'moment';
+
 
 
 
@@ -210,8 +170,7 @@ export default {
   },
   name: "edit-customer",
   created: function(){
-    
-    this.moment = moment;
+   
   },
   setup(){
     //eslint-disable-next-line no-unused-vars 
@@ -238,14 +197,7 @@ export default {
           console.log(response.data);
 
 
-          CommentDataService.getAll("customer", id)
-        .then(response => {
-          this.currentCustomer.commentList = response.data.data;
-          console.log(response.data);
-        })
-        .catch(e => {
-          console.log(e);
-        });
+        
 
         
         })
