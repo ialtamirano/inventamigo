@@ -14,7 +14,8 @@
                 <br>
                 {{commentItem.text}}
                 <br>
-                
+               
+                : {{ formatDistance(Date.parse(commentItem.created),new Date())  }}
               </p>
             </div>
           </div>
@@ -22,9 +23,7 @@
 
         <article class="media">
           <figure class="media-left">
-            <p class="image is-64x64">
-              <img src="https://bulma.io/images/placeholders/128x128.png">
-            </p>
+            
           </figure>
           <div class="media-content">
             <div class="field">
@@ -45,7 +44,7 @@
 <script>
 import CommentDataService from "../services/CommentDataService";
 //eslint-disable-next-line no-unused-vars 
-import moment from 'moment';
+import { format, formatDistance, formatRelative, subDays } from 'date-fns'
 
 
 
@@ -59,7 +58,9 @@ export default {
       comment :{
         id: null,
         text: "",
-      }
+      },
+      format,
+      formatDistance
   }),
   setup(){
    //this.moment = moment;

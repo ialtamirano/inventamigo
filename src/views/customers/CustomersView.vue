@@ -85,7 +85,11 @@
     Comentarios y Notas:
       <CommentBox id="CustomerComments"  entityName="customer" :entityId="currentCustomer.id" />   
   </div>
-  <div class="column"></div>
+  <div class="column">
+
+    Archivos:
+      <FileBox id="CustomerFiles"  entityName="customer" :entityId="currentCustomer.id" />
+  </div>
 </div>
 
 
@@ -155,6 +159,8 @@
 
  //eslint-disable-next-line no-unused-vars 
 import CommentBox from "@/components/CommentBox.vue";
+//eslint-disable-next-line no-unused-vars 
+import FileBox from "@/components/FileBox.vue";
 
 
 import CustomerDataService from "../../services/CustomerDataService";

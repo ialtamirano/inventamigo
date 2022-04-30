@@ -16,6 +16,7 @@
     "bulma-floating-button": "^1.0.3",
     "bulma-list": "^1.1.4",
     "core-js": "^3.19.1",
+    "date-fns": "^2.28.0",
     "mitt": "^3.0.0",
     "sass-loader": "^10.1.1",
     "tiny-emitter": "^2.1.0",
