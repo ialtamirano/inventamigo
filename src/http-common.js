@@ -32,10 +32,3 @@ axiosInstance.interceptors.response.use(function (response) {
 });
 
 export default axiosInstance;
-/*
-export default axios.create({
-  baseURL: "http://192.168.0.18:8080/",
-  headers: { 
-    "Content-Type" : "application/json"
-  }
-});*/

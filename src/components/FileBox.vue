@@ -12,18 +12,17 @@
       <ul>
         <li v-for="file in fileList" :key="file.id">
           <span>{{file.name}}</span> -
-          
-          <span v-if="file.error">{{file.error}}</span>
-          <span v-else-if="file.success">success</span>
-          <span v-else-if="file.active">active</span>
-          <span v-else-if="!!file.error">{{file.error}}</span>
-          <span v-else></span>
+          <span class="icon has-text-success" ><i class="fa" :class="filetypes.getIcon(file.extension) " ></i></span>
+         
         </li>
       </ul>
   </div>
 </template>
 
 <script>
+
+//eslint-disable-next-line no-unused-vars
+import filetypes from "../enums/file-types" 
 import FileDataService from "../services/FileDataService";
 //eslint-disable-next-line no-unused-vars 
 import { format, formatDistance, formatRelative, subDays } from 'date-fns'
@@ -43,7 +42,8 @@ export default {
       },
       format,
       formatDistance,
-      imagesArray: null
+      imagesArray: null,
+      filetypes
   }),
   setup(){
    //this.moment = moment;
