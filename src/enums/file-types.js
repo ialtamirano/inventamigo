@@ -30,8 +30,7 @@ export default {
         else if (excel_extensions.includes(extension)){
             icon = "fa-file-excel";
         } else if (audio_extensions.includes(extension)){
-
-            icon = "fa-file-audio";
+            icon = "fa-file-audio ";
         } else if (video_extensions.includes(extension)){
             icon = "fa-file-video";}
         else if (image_extensions.includes(extension)){

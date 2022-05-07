@@ -82,12 +82,13 @@
 </div>
 <div class="columns">
   <div class="column">
-    Comentarios y Notas:
+    <h4>Comentarios y Notas:</h4>
+   
       <CommentBox id="CustomerComments"  entityName="customer" :entityId="currentCustomer.id" />   
   </div>
   <div class="column">
 
-    Archivos:
+    <h4>Archivos:</h4>
       <FileBox id="CustomerFiles"  entityName="customer" :entityId="currentCustomer.id" />
   </div>
 </div>

@@ -1,21 +1,41 @@
  
  <template>
   <div :id="id" >
-    <form @submit.prevent="onUpload">
-          <div class="form-group">
-              <input type="file" name="imagesArray" multiple @change="onChange">
-          </div>
-          <div class="form-group">
-              <button class="btn btn-success">Store</button>
-          </div>
+    <form @submit.prevent="onUpload" class="form">
+      <div class="form-group file-area" @dragover="dragover" @dragleave="dragleave" @drop="drop">
+        
+            <input  type="file" name="filesArray" multiple @change="onChange">
+            
+            <div class="file-dummy">
+             
+              <div class="default" >Para agregar archivos, arrastre &oacute; haga clic para seleccionar desde su computadora!</div>
+            </div>
+             <span  v-for="item in filesArray" :key="item.id" >
+                {{item.name}}
+             </span>
+      </div>  
+      <div class="form-group">
+          <button class="button is-primary">Subir</button>
+      </div>
       </form>
-      <ul>
-        <li v-for="file in fileList" :key="file.id">
-          <span>{{file.name}}</span> -
-          <span class="icon has-text-success" ><i class="fa" :class="filetypes.getIcon(file.extension) " ></i></span>
-         
-        </li>
-      </ul>
+      
+
+      <article class="media" v-for="file in fileList" :key="file.id">
+          <div class="media-content">
+            <div class="content">
+                <span class="icon">
+                <i class="fa" :class="filetypes.getIcon(file.extension)" ></i>
+            </span>               
+               <a @click.prevent="viewFile(file)" >{{file.name}}</a>
+               <br>
+                 <small>{{file.full_name}}</small> - <small>{{ formatDistance(Date.parse(file.created),new Date())  }}</small>
+            </div>
+           
+          </div>
+          <div class="media-right">
+            <button class="delete"></button>
+          </div>
+        </article>
   </div>
 </template>
 
@@ -23,6 +43,7 @@
 
 //eslint-disable-next-line no-unused-vars
 import filetypes from "../enums/file-types" 
+import http from "../http-common";
 import FileDataService from "../services/FileDataService";
 //eslint-disable-next-line no-unused-vars 
 import { format, formatDistance, formatRelative, subDays } from 'date-fns'
@@ -42,8 +63,10 @@ export default {
       },
       format,
       formatDistance,
-      imagesArray: null,
-      filetypes
+      filesArray: [],
+      filetypes,
+      http,
+
   }),
   setup(){
    //this.moment = moment;
@@ -52,17 +75,44 @@ export default {
   },
   mounted(){
     console.log("mounted");
+    console.log(http);
     this.loadFiles();
   },
   methods: {
     onChange (event) {
-          this.imagesArray = event.target.files
-        },
+          this.filesArray = [...event.target.files];
+          //this.filesArray =  this.$refs.file.files
+
+    },
+    dragover(event) {
+      event.preventDefault();
+      // Add some visual fluff to show the user can drop its files
+      if (!event.currentTarget.classList.contains('bg-green-300')) {
+        event.currentTarget.classList.remove('bg-gray-100');
+        event.currentTarget.classList.add('bg-green-300');
+      }
+    },
+    dragleave(event) {
+      // Clean up
+      event.currentTarget.classList.add('bg-gray-100');
+      event.currentTarget.classList.remove('bg-green-300');
+    },
+    drop(event) {
+      event.preventDefault();
+      
+      this.filesArray = [...event.dataTransfer.files];
+     
+      //this.$refs.file.files = event.dataTransfer.files;
+      //this.onChange(event); // Trigger the onChange event manually
+      // Clean up
+      event.currentTarget.classList.add('bg-gray-100');
+      event.currentTarget.classList.remove('bg-green-300');
+    },
     onUpload() {
           const formData = new FormData();
 
-          for (const i of Object.keys(this.imagesArray)) {
-            formData.append('imagesArray', this.imagesArray[i])
+          for (const i of Object.keys(this.filesArray)) {
+            formData.append('filesArray', this.filesArray[i])
           }
 
           FileDataService.create(this.entityName, this.entityId,formData)
@@ -70,7 +120,9 @@ export default {
             
               
               this.file.text = "";
-              this.fileList.push(response.data.data);
+              console.log(response.data.data);
+              this.fileList.push(...response.data.data);
+              this.filesArray = null;
               
             
           })
@@ -79,10 +131,7 @@ export default {
             alert(e.response.data.error.description);
           });
 
-          /*axios.post('http://localhost:8888/api/multi-images-upload', formData, {
-          }).then((res) => {
-            console.log(res)
-          })*/
+
         },  
      
       loadFiles(){
@@ -108,19 +157,59 @@ export default {
 
        
     
-      FileDataService.create(data)
-      .then(response => {
-         
+        FileDataService.create(data)
+        .then(response => {
           
-          this.file.text = "";
-          this.fileList.push(response.data.data);
+            
+            this.file.text = "";
+            this.fileList.push(response.data.data);
+            
           
-         
-      })
-      .catch(e=> {
-        console.log(e);
-        alert(e.response.data.error.description);
-      })
+        })
+        .catch(e=> {
+          console.log(e);
+          alert(e.response.data.error.description);
+        })
+
+
+      },
+      viewFile(file){
+        
+     
+
+
+        FileDataService.view(file.id)
+        .then(response => {
+          
+
+
+          var fileURL = window.URL.createObjectURL(new Blob([response.data]));
+              var fileLink = document.createElement('a');
+            
+              fileLink.href = fileURL;
+              fileLink.setAttribute('download', file.name);
+              document.body.appendChild(fileLink);
+            
+              fileLink.click();
+
+
+
+          /*const blob = new Blob([response.data], {  type: 'application/'+file.extension })
+          const link = document.createElement('a')
+          link.href = URL.createObjectURL(blob)
+          link.download = file.name
+          link.click()
+          URL.revokeObjectURL(link.href)
+*/
+
+           //console.log(response.data);
+            
+          
+        })
+        .catch(e=> {
+          console.log(e);
+          alert(e.response.data.error.description);
+        })
 
 
       }
@@ -128,3 +217,55 @@ export default {
   }
 }
 </script>
+<style lang="scss">
+  /* ===================== FILE INPUT ===================== */
+.file-area {
+  width: 100%;
+  position: relative;
+  
+  input[type=file] {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+  
+  .file-dummy {
+    width: 100%;
+    padding: 30px;
+    background: rgba(255,255,255,0.2);
+    border: 2px dotted rgba(255, 255, 255, 0.885);
+    text-align: center;
+    border-radius: 4px;
+    transition: background 0.3s ease-in-out;
+    
+    .success {
+      display: none;
+    }
+  }
+  
+  &:hover .file-dummy {
+    background: rgba(255,255,255,0.1);
+  }
+  
+  input[type=file]:focus + .file-dummy {
+    outline: 2px solid rgba(228, 228, 228, 0.5);
+    outline: -webkit-focus-ring-color auto 5px;
+  }
+  
+  input[type=file]:valid + .file-dummy {
+    border-color: rgba(113, 114, 113, 0.939);
+    .success {
+      display: inline-block;
+    }
+    .default {
+      /*display: none;*/
+    }
+  }
+}
+</style>

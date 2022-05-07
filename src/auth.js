@@ -34,8 +34,7 @@ export default {
         }
       })
     }
-    ,
-  
+    , 
     getToken () {
       return localStorage.token
     },

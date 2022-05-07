@@ -1,7 +1,7 @@
 import http from "../http-common";
 
 
-class PartDataService {
+class FileDataService {
 
   getAll(entity_name,entity_id) {
     return http.get("/files/",
@@ -16,6 +16,11 @@ class PartDataService {
  // eslint-disable-next-line no-unused-vars  
   get(id) {
     return http.get("/files/"+id);
+  }
+
+  // eslint-disable-next-line no-unused-vars  
+  view(id) {
+    return http.get("/files/serve/"+id,{ responseType: 'blob'});
   }
 
   // eslint-disable-next-line no-unused-vars  
@@ -44,4 +49,4 @@ class PartDataService {
 
 }
 
-export default new PartDataService();
+export default new FileDataService();

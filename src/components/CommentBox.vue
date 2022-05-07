@@ -1,23 +1,39 @@
  
  <template>
   <div :id="id" >
+    
+
+
     <article class="media" v-for="commentItem in commentList" :key="commentItem.id">
           <figure class="media-left">
-            <p class="image is-64x64">
-              <img src="https://bulma.io/images/placeholders/128x128.png">
+            <p class="image is-48x48">
+              <img src="https://bulma.io/images/placeholders/48x48.png">
             </p>
           </figure>
           <div class="media-content">
             <div class="content">
-              <p>
-                <strong>{{commentItem.createdby}}</strong>
+              
+                <strong>{{commentItem.full_name}}</strong> <small> {{ formatDistance(Date.parse(commentItem.created),new Date())  }} </small>
                 <br>
                 {{commentItem.text}}
-                <br>
-               
-                : {{ formatDistance(Date.parse(commentItem.created),new Date())  }}
-              </p>
+
             </div>
+            <nav class="level is-mobile">
+              <div class="level-left">
+                <a class="level-item">
+                  <span class="icon is-small"><i class="fas fa-reply"></i></span>
+                </a>
+                <a class="level-item">
+                  <span class="icon is-small"><i class="fas fa-retweet"></i></span>
+                </a>
+                <a class="level-item">
+                  <span class="icon is-small"><i class="fas fa-heart"></i></span>
+                </a>
+              </div>
+            </nav>
+          </div>
+          <div class="media-right">
+            <button class="delete" @click="deleteComment(commentItem)"></button>
           </div>
         </article>
 
@@ -26,15 +42,16 @@
             
           </figure>
           <div class="media-content">
-            <div class="field">
+            <div class="field is-grouped">
+              <p class="control is-expanded">
+                <textarea class="textarea" placeholder="Add a comment..." v-model="comment.text" rows="1"></textarea>
+              </p>
               <p class="control">
-                <textarea class="textarea" placeholder="Add a comment..." v-model="comment.text"></textarea>
+                <button class="button" @click="postComment" >Enviar</button>
               </p>
             </div>
             <div class="field">
-              <p class="control">
-                <button class="button" @click="postComment" >Post comment</button>
-              </p>
+              
             </div>
           </div>
         </article>
@@ -63,19 +80,13 @@ export default {
       formatDistance
   }),
   setup(){
-   //this.moment = moment;
-    //console.log(props)
-   
+
   },
   mounted(){
-    console.log("mounted");
     this.loadComments();
   },
   methods: {
-      search(){
-            this.emitter.emit("searchbar-search", this.searchQuery);
-            this.searchQuery = "";
-      },
+      
       loadComments(){
 
         CommentDataService.getAll(this.entityName, this.entityId)
@@ -90,8 +101,11 @@ export default {
 
       },
       postComment() {
+
+        console.log(this.comment);
+
+
         var data = {
-        
           text: this.comment.text,
           entity_id:this.entityId,
           entity_name:this.entityName
@@ -103,7 +117,11 @@ export default {
       .then(response => {
          
           
-          this.comment.text = "";
+          this.comment = {
+            id: null,
+            text: "",
+          };
+          
           this.commentList.push(response.data.data);
           
          
@@ -112,6 +130,25 @@ export default {
         console.log(e);
         alert(e.response.data.error.description);
       })
+
+
+      },
+      deleteComment(comment){
+
+
+        if(confirm("Realmente desea eliminar el registro?")){
+
+            CommentDataService.delete(comment.id)
+              .then(response => {
+                this.commentList.splice(this.commentList.findIndex(v => v.id === comment.id), 1);
+
+
+                console.log(response.data);
+              })
+              .catch(e => {
+                console.log(e);
+              });  
+        }
 
 
       }
