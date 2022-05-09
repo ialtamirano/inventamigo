@@ -6,7 +6,7 @@
         
             <input  type="file" name="filesArray" multiple @change="onChange">
             
-            <div class="file-dummy">
+            <div class="file-chooser">
              
               <div class="default" >Para agregar archivos, arrastre &oacute; haga clic para seleccionar desde su computadora!</div>
             </div>
@@ -26,7 +26,7 @@
                 <span class="icon">
                 <i class="fa" :class="filetypes.getIcon(file.extension)" ></i>
             </span>               
-               <a @click.prevent="viewFile(file)" >{{file.name}}</a>
+               <a @click.prevent="downloadFile(file)" >{{file.name}}</a>
                <br>
                  <small>{{file.full_name}}</small> - <small>{{ formatDistance(Date.parse(file.created),new Date())  }}</small>
             </div>
@@ -102,9 +102,6 @@ export default {
       
       this.filesArray = [...event.dataTransfer.files];
      
-      //this.$refs.file.files = event.dataTransfer.files;
-      //this.onChange(event); // Trigger the onChange event manually
-      // Clean up
       event.currentTarget.classList.add('bg-gray-100');
       event.currentTarget.classList.remove('bg-green-300');
     },
@@ -120,7 +117,7 @@ export default {
             
               
               this.file.text = "";
-              console.log(response.data.data);
+            
               this.fileList.push(...response.data.data);
               this.filesArray = null;
               
@@ -173,7 +170,7 @@ export default {
 
 
       },
-      viewFile(file){
+      downloadFile(file){
         
      
 
@@ -191,18 +188,6 @@ export default {
               document.body.appendChild(fileLink);
             
               fileLink.click();
-
-
-
-          /*const blob = new Blob([response.data], {  type: 'application/'+file.extension })
-          const link = document.createElement('a')
-          link.href = URL.createObjectURL(blob)
-          link.download = file.name
-          link.click()
-          URL.revokeObjectURL(link.href)
-*/
-
-           //console.log(response.data);
             
           
         })
@@ -235,7 +220,7 @@ export default {
     cursor: pointer;
   }
   
-  .file-dummy {
+  .file-chooser {
     width: 100%;
     padding: 30px;
     background: rgba(255,255,255,0.2);
@@ -249,16 +234,16 @@ export default {
     }
   }
   
-  &:hover .file-dummy {
+  &:hover .file-chooser {
     background: rgba(255,255,255,0.1);
   }
   
-  input[type=file]:focus + .file-dummy {
+  input[type=file]:focus + .file-chooser {
     outline: 2px solid rgba(228, 228, 228, 0.5);
     outline: -webkit-focus-ring-color auto 5px;
   }
   
-  input[type=file]:valid + .file-dummy {
+  input[type=file]:valid + .file-chooser {
     border-color: rgba(113, 114, 113, 0.939);
     .success {
       display: inline-block;
