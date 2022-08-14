@@ -89,7 +89,7 @@
   <div class="column">
 
     <h4>Archivos:</h4>
-      <FileBox id="CustomerFiles"  entityName="customer" :entityId="currentCustomer.id" />
+      <FileBox id="CustomerFiles"  entityName="customer" boxType="single" :entityId="currentCustomer.id" />
   </div>
 </div>
 

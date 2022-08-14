@@ -2,7 +2,27 @@
  <template>
   <div :id="id" >
     <form @submit.prevent="onUpload" class="form">
-      <div class="form-group file-area" @dragover="dragover" @dragleave="dragleave" @drop="drop">
+       <div class="field is-centered" v-if="boxType === 'single'" >
+        <div class="form-group single-file-area" @dragover="dragover" @dragleave="dragleave" @drop="drop">
+        
+            <input  type="file" name="filesArray"  @change="onChange">
+            
+            <div class="file-chooser">
+             
+              <div class="default" >Iniciales</div>
+            </div>
+            <span  v-if="filesArray.length > 0"  >
+                {{filesArray[0].name}}
+             </span>
+           
+        </div>  
+         <div class="form-group">
+              <button class="button is-primary"><span class="icon"><i class="fa fa-upload"></i></span><span> Subir una foto</span></button>
+          </div>
+      </div>
+
+      <div class="field" v-if="boxType === 'multiple'" >
+        <div class="form-group file-area" @dragover="dragover" @dragleave="dragleave" @drop="drop">
         
             <input  type="file" name="filesArray" multiple @change="onChange">
             
@@ -13,11 +33,15 @@
              <span  v-for="item in filesArray" :key="item.id" >
                 {{item.name}}
              </span>
-      </div>  
-      <div class="form-group">
-          <button class="button is-primary">Subir</button>
+        </div>  
       </div>
-      </form>
+      
+      <div class="field"  v-if="boxType === 'multiple'">
+          <div class="form-group">
+              <button class="button is-primary"><span class="icon"><i class="fa fa-upload"></i></span><span> Subir</span></button>
+          </div>
+      </div>
+    </form>
       
 
       <article class="media" v-for="file in fileList" :key="file.id">
@@ -52,10 +76,10 @@ import { format, formatDistance, formatRelative, subDays } from 'date-fns'
 
 export default {
  
-  props: ["id", "entityName","entityId"],
+  props: ["id", "entityName","entityId","boxType"],
   name: 'FileBox',
   data: () => ({
-   
+
       fileList : [],
       file :{
         id: null,
@@ -69,14 +93,15 @@ export default {
 
   }),
   setup(){
-   //this.moment = moment;
-    //console.log(props)
+ 
+   
    
   },
   mounted(){
     console.log("mounted");
-    console.log(http);
+    console.log(this.props);
     this.loadFiles();
+    
   },
   methods: {
     onChange (event) {
@@ -227,6 +252,57 @@ export default {
     border: 2px dotted rgba(255, 255, 255, 0.885);
     text-align: center;
     border-radius: 4px;
+    transition: background 0.3s ease-in-out;
+    
+    .success {
+      display: none;
+    }
+  }
+  
+  &:hover .file-chooser {
+    background: rgba(255,255,255,0.1);
+  }
+  
+  input[type=file]:focus + .file-chooser {
+    outline: 2px solid rgba(228, 228, 228, 0.5);
+    outline: -webkit-focus-ring-color auto 5px;
+  }
+  
+  input[type=file]:valid + .file-chooser {
+    border-color: rgba(113, 114, 113, 0.939);
+    .success {
+      display: inline-block;
+    }
+    .default {
+      /*display: none;*/
+    }
+  }
+}
+
+
+.single-file-area {
+  width: 100%;
+  position: relative;
+  
+  input[type=file] {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+  
+  .file-chooser {
+    width: 100%;
+    padding: 30px;
+    background: rgba(255,255,255,0.2);
+    border: 2px dotted rgba(255, 255, 255, 0.885);
+    text-align: center;
+    border-radius: 50px;
     transition: background 0.3s ease-in-out;
     
     .success {

@@ -1,15 +1,15 @@
 <template>
     <div class="container">
-        <label>{{ label}}</label>
-        <input :value="value" @click="$emit('input', $event)" :placeholder="placeholder" >
+        <label><span>{{ label}}:</span>{{value}}</label>
+        
     </div>
 </template>
 <script>
 
 export default {
-    name :"InputControl",
+    name :"LabelControl",
     props:["label","value","placeholder"],
-    emits:["input"]
+    
 }
 </script>
 <style scoped>

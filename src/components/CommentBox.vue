@@ -44,14 +44,14 @@
           <div class="media-content">
             <div class="field is-grouped">
               <p class="control is-expanded">
-                <textarea class="textarea" placeholder="Add a comment..." v-model="comment.text" rows="1"></textarea>
+                <textarea class="textarea" placeholder="Agregue un comentario..." v-model="comment.text" rows="1"></textarea>
               </p>
-              <p class="control">
-                <button class="button" @click="postComment" >Enviar</button>
-              </p>
+              
             </div>
             <div class="field">
-              
+              <p class="control">
+                <button class="button is-primary" @click="postComment" ><span class="icon"><i class="fa fa-paper-plane"></i></span><span>  Enviar</span></button>
+              </p>
             </div>
           </div>
         </article>

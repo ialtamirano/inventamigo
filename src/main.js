@@ -5,6 +5,7 @@ import CommentBox from './components/CommentBox.vue'
 import FileBox from './components/FileBox.vue'
 import auth from './auth'
 import { createDynamicForms } from '@asigloo/vue-dynamic-forms'
+//import VueConfirmDialog from 'vue-confirm-dialog'
 
 
 
@@ -91,7 +92,11 @@ const VueDynamicForms = createDynamicForms()
 
 const app = createApp(App).use(router).use(VueDynamicForms);
 
+//app.use(VueConfirmDialog)
+
+
 app.config.globalProperties.emitter = emitter;
 app.component('CommentBox',CommentBox);
 app.component('FileBox',FileBox);
+//app.component('vue-confirm-dialog', VueConfirmDialog.default)
 app.mount('#app')

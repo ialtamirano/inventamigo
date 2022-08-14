@@ -1,14 +1,17 @@
 <template>
     <div class="container">
         <label>{{ label}}</label>
-        <input :value="value" @click="$emit('input', $event)" :placeholder="placeholder" >
+        <select :value="value" @change="$emit('input',$event)" type="text" :placeholder="title.placeholder" > 
+
+            <option :value="option" v-for="(option, index) in options" :key="index">{{ option }}</option>
+        </select>
     </div>
 </template>
 <script>
 
 export default {
-    name :"InputControl",
-    props:["label","value","placeholder"],
+    name :"SelectControl",
+    props:["label","value","options"],
     emits:["input"]
 }
 </script>

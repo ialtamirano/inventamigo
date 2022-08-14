@@ -53,9 +53,11 @@
                       </div>       
         </div>
         <div class="field">
-          <p class="control">
-            <textarea class="textarea" placeholder="Agregar un comentario..."></textarea>
-          </p>
+          
+          <h4>Comentarios:</h4>
+        
+            <CommentBox id="BasketComments"  entityName="basket" :entityId="currentBasket.id" />   
+        
         </div>
           <nav class="level">
             <div class="level-left">
@@ -109,6 +111,8 @@
 </template>
 
 <script>
+ //eslint-disable-next-line no-unused-vars 
+import CommentBox from "@/components/CommentBox.vue";
 import BasketDataService from "../../services/BasketDataService";
 
 export default {
