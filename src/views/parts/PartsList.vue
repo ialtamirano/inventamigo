@@ -20,9 +20,13 @@
             <tbody>
                 <tr v-for="part in parts" :key="part.id">
                         <td width="5%">
-                            <figure class="image is-64x64">
-                       <img src="https://bulma.io/images/placeholders/64x64.png">
-                        </figure>
+                            <PictureBox
+                                id="PartFiles"
+                                entityName="part"
+                                boxType="single"
+                                includePreview="true"
+                                :entityId="part.id"
+                            />
                         </td>
                         <td><span class="is-size-5"> <router-link :to="'/parts/'+part.id">  {{part.name}}</router-link></span>  </td>
                         
@@ -39,7 +43,8 @@
 <script>
 
 import PartDataService from "../../services/PartDataService"
-
+//eslint-disable-next-line no-unused-vars
+import PictureBox from "@/components/PictureBox.vue";
 
 export default {
   name:"parts-list",

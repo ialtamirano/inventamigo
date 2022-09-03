@@ -1,74 +1,77 @@
- 
- <template>
+  <template>
   <div :id="id">
     <form @submit.prevent="onUpload" class="form">
       <section class="section">
-      <!--Single File Start-->
-      <div class="field is-centered" v-if="boxType === 'single'">
-        <div
-          class="form-group single-file-area"
-          @dragover="dragover"
-          @dragleave="dragleave"
-          @drop="drop"
-        >
-          <input type="file" name="filesArray" @change="onChange" />
+        <!--Single File Start-->
+        <div class="field is-centered" v-if="boxType === 'single'">
+          <div
+            class="form-group single-file-area"
+            @dragover="dragover"
+            @dragleave="dragleave"
+            @drop="drop"
+          >
+            <input type="file" name="filesArray" @change="onChange" />
 
-          <div class="file-chooser">
-            <div class="default">Iniciales</div>
-          </div>
-          <span v-if="filesArray.length > 0">
-            {{ filesArray[0].name }}
-          </span>
-        </div>
-        <div class="form-group">
-          <button class="button is-primary is-left">
-            <span class="icon"><i class="fa fa-upload"></i></span
-            ><span> Subir una foto</span>
-          </button>
-        </div>
-      </div>
-      <!--Multiple File Start-->
-      <div class="field" v-if="boxType === 'multiple'">
-        <div
-          class="form-group file-area"
-          @dragover="dragover"
-          @dragleave="dragleave"
-          @drop="drop"
-        >
-          <input
-            type="file"
-            name="filesArray"
-            multiple
-            @change="onChange"
-            :accept="acceptFiles"
-          />
-
-          <div class="file-chooser">
-            <div class="default">
-              Para agregar archivos, arrastre &oacute; haga clic para
-              seleccionar desde su computadora!
+            <div class="file-chooser">
+              <div class="default">
+                <figure class="image is-128x128">
+                  <img src="https://bulma.io/images/placeholders/128x128.png" />
+                </figure>
+              </div>
             </div>
+            <span v-if="filesArray.length > 0">
+              {{ filesArray[0].name }}
+            </span>
           </div>
-          <span v-for="item in filesArray" :key="item.id">
-            {{ item.name }}
-          </span>
+          <div class="form-group">
+            <button class="button is-primary is-left is-round">
+              <span class="icon"><i class="fa fa-upload"></i></span
+              ><span> Subir una foto</span>
+            </button>
+          </div>
         </div>
-      </div>
+        <!--Multiple File Start-->
+        <div class="field" v-if="boxType === 'multiple'">
+          <div
+            class="form-group file-area"
+            @dragover="dragover"
+            @dragleave="dragleave"
+            @drop="drop"
+          >
+            <input
+              type="file"
+              name="filesArray"
+              multiple
+              @change="onChange"
+              :accept="acceptFiles"
+            />
 
-      <div class="field" v-if="boxType === 'multiple'">
-        <div class="form-group">
-          <button class="button is-primary">
-            <span class="icon"><i class="fas fa-upload"></i></span
-            ><span> Subir</span>
-          </button>
+            <div class="file-chooser">
+              <div class="default">
+                Para agregar archivos, arrastre &oacute; haga clic para
+                seleccionar desde su computadora!
+              </div>
+            </div>
+            <span v-for="item in filesArray" :key="item.id">
+              {{ item.name }}
+            </span>
+          </div>
         </div>
-      </div>
-    </section>
+
+        <div class="field" v-if="boxType === 'multiple'">
+          <div class="form-group">
+            <button class="button is-primary">
+              <span class="icon"><i class="fas fa-upload"></i></span
+              ><span> Subir</span>
+            </button>
+          </div>
+        </div>
+      </section>
     </form>
     <!--File List -->
-   
+
     <article class="media" v-for="file in fileList" :key="file.id">
-      <figure class="media-left" v-if="includePreview==true">
+      <figure class="media-left" v-if="includePreview == true">
         <p class="image is-96x96 is-square">
           <img :id="'filePreview' + file.id" />
           {{ fetchFile(file) }}
@@ -91,7 +94,6 @@
         <button class="delete"></button>
       </div>
     </article>
-
   </div>
 </template>
 
@@ -104,7 +106,14 @@ import FileDataService from "../services/FileDataService";
 import { format, formatDistance, formatRelative, subDays } from "date-fns";
 
 export default {
-  props: ["id", "entityName", "entityId", "boxType", "acceptFiles","includePreview"],
+  props: [
+    "id",
+    "entityName",
+    "entityId",
+    "boxType",
+    "acceptFiles",
+    "includePreview",
+  ],
   name: "FileBox",
   data: () => ({
     fileList: [],
@@ -144,11 +153,7 @@ export default {
     drop(event) {
       event.preventDefault();
 
-  
-
       this.filesArray = [...event.dataTransfer.files];
-
-    
 
       event.currentTarget.classList.add("bg-gray-100");
       event.currentTarget.classList.remove("bg-green-300");

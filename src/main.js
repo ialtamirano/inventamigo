@@ -3,6 +3,7 @@ import { createApp } from 'vue/dist/vue.esm-bundler'
 import App from './App.vue'
 import CommentBox from './components/CommentBox.vue'
 import FileBox from './components/FileBox.vue'
+import PictureBox from './components/PictureBox.vue'
 import auth from './auth'
 import { createDynamicForms } from '@asigloo/vue-dynamic-forms'
 //import VueConfirmDialog from 'vue-confirm-dialog'
@@ -98,5 +99,6 @@ const app = createApp(App).use(router).use(VueDynamicForms);
 app.config.globalProperties.emitter = emitter;
 app.component('CommentBox',CommentBox);
 app.component('FileBox',FileBox);
+app.component('PictureBox',PictureBox);
 //app.component('vue-confirm-dialog', VueConfirmDialog.default)
 app.mount('#app')

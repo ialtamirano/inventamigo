@@ -38,9 +38,9 @@ class FileDataService {
     return http.post("/files/?entity_name="+entity_name+"&entity_id="+entity_id, data);
   }
   // eslint-disable-next-line no-unused-vars  
-  update(id, data) {
+  update(entity_name,entity_id,id, data) {
     
-    return http.put("/files/"+id, data);
+    return http.put("/files/"+id+"?entity_name="+entity_name+"&entity_id="+entity_id, data);
   }
 
   // eslint-disable-next-line no-unused-vars
