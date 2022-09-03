@@ -20,6 +20,7 @@
     </div>
 
     <div v-if="currentPart">
+      <h4>Datos</h4>
       <form>
         <div class="field is-horizontal">
           <div class="field-label is-normal">
@@ -125,16 +126,6 @@
             </div>
           </div>
         </div>
-
-        <h4>Campos perzonalizados</h4>
-
-        <TextField
-          v-for="post in inputs"
-          :key="post.id"
-          :title="post.title"
-        ></TextField>
-
-        <component :is="TextField"></component>
         <h4>Fotos:</h4>
         <FileBox
           id="PartFiles"
@@ -142,6 +133,7 @@
           boxType="multiple"
           acceptFiles=".jpg,.png"
           :entityId="currentPart.id"
+          :includePreview="true"
           
         />
         <div class="field is-grouped">
@@ -170,16 +162,13 @@
 
 <script>
 import PartDataService from "../../services/PartDataService";
-import TextField from "../../components/InputControl";
-//import SelectField from "../../components/SelectControl";
-//import LabelField from "../../components/LabelControl";
 
 //eslint-disable-next-line no-unused-vars
 import FileBox from "@/components/FileBox.vue";
 
 export default {
   components: {
-    TextField,
+  
   },
   name: "edit-part",
   data() {
@@ -246,7 +235,7 @@ export default {
   mounted() {
     this.message = "";
     this.getPart(this.$route.params.id);
-    console.log(TextField);
+  
   },
 };
 </script>

@@ -2,6 +2,8 @@
  <template>
   <div :id="id">
     <form @submit.prevent="onUpload" class="form">
+      <section class="section">
+      <!--Single File Start-->
       <div class="field is-centered" v-if="boxType === 'single'">
         <div
           class="form-group single-file-area"
@@ -19,13 +21,13 @@
           </span>
         </div>
         <div class="form-group">
-          <button class="button is-primary">
+          <button class="button is-primary is-left">
             <span class="icon"><i class="fa fa-upload"></i></span
             ><span> Subir una foto</span>
           </button>
         </div>
       </div>
-
+      <!--Multiple File Start-->
       <div class="field" v-if="boxType === 'multiple'">
         <div
           class="form-group file-area"
@@ -33,7 +35,13 @@
           @dragleave="dragleave"
           @drop="drop"
         >
-          <input type="file" name="filesArray" multiple @change="onChange" :accept="acceptFiles" />
+          <input
+            type="file"
+            name="filesArray"
+            multiple
+            @change="onChange"
+            :accept="acceptFiles"
+          />
 
           <div class="file-chooser">
             <div class="default">
@@ -55,16 +63,17 @@
           </button>
         </div>
       </div>
+    </section>
     </form>
-
+    <!--File List -->
+   
     <article class="media" v-for="file in fileList" :key="file.id">
-     <div class="media-left">
-      <p class="image is-96x96">
-       
-       <img :src="file.fileURL" class="">
-       {{ viewFile(file) }}
-    </p>
-     </div>
+      <figure class="media-left" v-if="includePreview==true">
+        <p class="image is-96x96 is-square">
+          <img :id="'filePreview' + file.id" />
+          {{ fetchFile(file) }}
+        </p>
+      </figure>
       <div class="media-content">
         <div class="content">
           <span class="icon">
@@ -76,13 +85,13 @@
           <small>{{
             formatDistance(Date.parse(file.created), new Date())
           }}</small>
-          
         </div>
       </div>
       <div class="media-right">
         <button class="delete"></button>
       </div>
     </article>
+
   </div>
 </template>
 
@@ -95,7 +104,7 @@ import FileDataService from "../services/FileDataService";
 import { format, formatDistance, formatRelative, subDays } from "date-fns";
 
 export default {
-  props: ["id", "entityName", "entityId", "boxType","acceptFiles"],
+  props: ["id", "entityName", "entityId", "boxType", "acceptFiles","includePreview"],
   name: "FileBox",
   data: () => ({
     fileList: [],
@@ -135,7 +144,11 @@ export default {
     drop(event) {
       event.preventDefault();
 
+  
+
       this.filesArray = [...event.dataTransfer.files];
+
+    
 
       event.currentTarget.classList.add("bg-gray-100");
       event.currentTarget.classList.remove("bg-green-300");
@@ -204,18 +217,12 @@ export default {
           alert(e.response.data.error.description);
         });
     },
-    viewFile(file) {
-      window.preventDefault();
-      //return FileDataService.view(file.id);
-
+    fetchFile(file) {
       FileDataService.view(file.id)
         .then((response) => {
-          var fileURL = window.URL.createObjectURL(new Blob([response.data]));
-          //var fileLink = document.createElement("img");
-          file.fileURL = fileURL;
-          //fileLink.src = fileURL;
-         
-            
+          let fileUrl = window.URL.createObjectURL(new Blob([response.data]));
+          let img = document.getElementById("filePreview" + file.id);
+          img.src = fileUrl;
         })
         .catch((e) => {
           console.log(e);

@@ -21,7 +21,7 @@ class FileDataService {
 
   // eslint-disable-next-line no-unused-vars  
   view(id) {
-   // return http.baseURL + "files/serve/" + id;
+   //return http.baseURL + "files/serve/" + id;
    return http.get("/files/serve/"+id,{ responseType: 'blob'});
   }
 
