@@ -1,11 +1,12 @@
 import axios from "axios";
 
-
+let  appUrl = "http://localhost:8080/";
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:8080/"
+  baseURL: appUrl
 });
 
+axiosInstance.baseURL = appUrl;
 
 axiosInstance.interceptors.request.use((config) => {
 
@@ -15,6 +16,7 @@ axiosInstance.interceptors.request.use((config) => {
 
   return config;
 });
+
 
 
 axiosInstance.interceptors.response.use(function (response) {

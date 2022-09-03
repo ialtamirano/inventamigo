@@ -1,4 +1,5 @@
 import http from "../http-common";
+//import auth from "../auth";
 
 
 class FileDataService {
@@ -20,7 +21,8 @@ class FileDataService {
 
   // eslint-disable-next-line no-unused-vars  
   view(id) {
-    return http.get("/files/serve/"+id,{ responseType: 'blob'});
+   // return http.baseURL + "files/serve/" + id;
+   return http.get("/files/serve/"+id,{ responseType: 'blob'});
   }
 
   // eslint-disable-next-line no-unused-vars  
